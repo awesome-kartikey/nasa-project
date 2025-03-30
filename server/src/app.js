@@ -15,8 +15,6 @@ app.use(
 app.use(morgan("combined"));
 
 app.use(express.json());
-console.log(path.join(__dirname, "..", "public"));
-console.log(path.join(__dirname, "..", "public", "index.html"));
 app.use(express.static(path.join(__dirname,"..","public")));
 
 app.use("/v1", api);
