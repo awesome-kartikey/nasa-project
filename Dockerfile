@@ -13,13 +13,14 @@ COPY client/ ./
 # Ensure the path is relative to the final server directory structure
 RUN BUILD_PATH=/app/server/public npm run build
 
-# Stage 3: Install Server Dependencies
+# Stage 3: Install Server Dependencies (server-builder)
 FROM base as server-builder
 WORKDIR /app/server
 COPY server/package.json server/package-lock.json ./
-# Use ci and install only production dependencies
-RUN npm ci --omit=dev 
-COPY server/ ./
+RUN npm ci --omit=dev
+COPY server/src ./src     # Explicitly copy src
+COPY server/data ./data   # Explicitly copy data
+# Add any other necessary server files/dirs here if they exist
 
 # Stage 4: Production Image - Combine build artifacts
 FROM node:lts-alpine
