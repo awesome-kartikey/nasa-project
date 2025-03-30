@@ -11,7 +11,7 @@ RUN npm ci
 COPY client/ ./
 # Set BUILD_PATH directly here and run the build
 # Ensure the path is relative to the final server directory structure
-RUN BUILD_PATH=/app/server/public npm run build
+RUN BUILD_PATH=/app/server/public npx react-scripts build
 
 # Stage 3: Install Server Dependencies (server-builder)
 FROM base as server-builder
