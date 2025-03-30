@@ -18,8 +18,8 @@ FROM base as server-builder
 WORKDIR /app/server
 COPY server/package.json server/package-lock.json ./
 RUN npm ci --omit=dev
-COPY server/src ./src     # Explicitly copy src
-COPY server/data ./data   # Explicitly copy data
+COPY server/src ./src
+COPY server/data ./data
 # Add any other necessary server files/dirs here if they exist
 
 # Stage 4: Production Image - Combine build artifacts
@@ -34,7 +34,7 @@ COPY --from=server-builder /app/server/node_modules ./server/node_modules
 COPY --from=server-builder /app/server/package.json ./server/package.json
 # Copy server source code
 COPY --from=server-builder /app/server/src ./server/src
-COPY --from=server-builder /app/server/data ./server/data # Do not forget data files
+COPY --from=server-builder /app/server/data ./server/data
 
 # Copy the built client static files from the client-builder stage
 COPY --from=client-builder /app/server/public ./server/public
