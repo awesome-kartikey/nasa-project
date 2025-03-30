@@ -1,0 +1,17 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "server/package.json",
+        "use": "@vercel/node",
+        "config": {
+        "includeFiles": ["data/**", "src/**"],
+        "maxLambdaSize": "50mb"
+      }
+      }
+    ],
+    "rewrites": [
+    { "source": "/(.*)", "destination": "/server/src/server.js" }
+  ]
+  }
+  

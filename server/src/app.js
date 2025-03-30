@@ -7,9 +7,11 @@ const api = require("./routes/api");
 
 const app = express();
 
+const clientOrigin = process.env.CLIENT_ORIGIN || 'http://localhost:3000';
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://nasa-mission-kartikey.netlify.app", // Updated URL
   })
 );
 app.use(morgan("combined"));
